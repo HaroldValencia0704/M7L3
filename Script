@@ -1,0 +1,29 @@
+-- Obteniendo acceso al botón padre de este script
+local button = script.Parent
+-- Obteniendo acceso a MarketplaceService
+local MPS = game:GetService("MarketplaceService")
+-- Obteniendo acceso al objeto "Rig" (este es el modelo con el accesorio)
+local rig = script.Parent.Parent:WaitForChild('Rig')
+
+local accessory = rig:WaitForChild('Accessory (Pixel Glasses)')
+
+local id = 3251864271 
+
+function getAcc(player)
+	-- Solicitando al jugador que compre un objeto con el ID especificado
+	MPS:PromptProductPurchase(player, id)
+	-- Configurando el controlador de eventos ProcessReceipt que responde a las compras
+	MPS.ProcessReceipt = function(receiptInfo)
+	
+		if receiptInfo.ProductId == id then
+
+			local player = game.Players:GetPlayerByUserId(receiptInfo.PlayerId)
+
+			local acc = accessory:Clone()
+
+			player.Character.Humanoid:AddAccessory(acc)
+		end
+	end
+end
+
+button.ClickDetector.MouseClick:Connect(getAcc)
