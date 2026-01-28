@@ -7,7 +7,7 @@ local rig = script.Parent.Parent:WaitForChild('Rig')
 
 local accessory = rig:WaitForChild('Accessory (Pixel Glasses)')
 
-local id = 3251864271 
+local id = 00000000
 
 function getAcc(player)
 	-- Solicitando al jugador que compre un objeto con el ID especificado
